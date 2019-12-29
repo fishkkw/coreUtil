@@ -1,12 +1,6 @@
 package core.webbassist.frameConfig;
 
-import java.io.BufferedInputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.util.zip.ZipEntry;
-import java.util.zip.ZipFile;
-import java.util.zip.ZipInputStream;
-
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
@@ -17,6 +11,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.web.filter.GenericFilterBean;
 
 import core.webbassist.config.VaildParamConfig;
+import core.webbassist.configMain.AbstractLoadXml;
 
 public class ParamCheckFilter extends GenericFilterBean {
 
@@ -48,25 +43,10 @@ public class ParamCheckFilter extends GenericFilterBean {
 	}
 
 	private void initConfiguration() throws ServletException, IOException {
-		InputStream resourceAsStream = this.getClass().getClassLoader().getResourceAsStream(config.getPath());
-		if (resourceAsStream == null) {
-			logger.error("Configuration file is empty...");
-			throw new ServletException();
-		}
-		if (".zip".equals(this.config.getResourceType())) {
-			ZipInputStream zis = new ZipInputStream(resourceAsStream);
-			ZipEntry ze;
-			while ((ze = zis.getNextEntry()) != null) {
-				if (!ze.isDirectory()) {
-					if (ze.getName().endsWith(".xml")) {
-						System.err.println("file - " + ze.getName() + " : " + ze.getSize() + " bytes");
-
-					}
-				}
-			}
-			zis.closeEntry();
-			zis.close();
-		}
+		String path = this.config.getPath();
+		String resourceType = this.config.getResourceType();
+		AbstractLoadXml abstractLoadXml = AbstractLoadXml.init(resourceType);
+		abstractLoadXml.LoadConfig(path);
 	}
 
 }
