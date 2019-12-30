@@ -46,7 +46,8 @@ public class ParamCheckFilter extends GenericFilterBean {
 		String path = this.config.getPath();
 		String resourceType = this.config.getResourceType();
 		AbstractLoadXml abstractLoadXml = AbstractLoadXml.init(resourceType);
-		abstractLoadXml.LoadConfig(path);
+		abstractLoadXml.setPath(path);
+		abstractLoadXml.LoadConfig();
 	}
 
 }

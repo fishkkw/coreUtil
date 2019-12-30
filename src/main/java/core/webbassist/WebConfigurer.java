@@ -32,7 +32,7 @@ public class WebConfigurer implements WebMvcConfigurer {
 	public FilterRegistrationBean<Filter> paramCheckFilter() {
 		FilterRegistrationBean<Filter> frBean = new FilterRegistrationBean<>();
 		VaildParamConfig config = new VaildParamConfig();
-		config.setPath("validata/validata.zip");
+		config.setPath("validate/validate.zip");
 		config.setResourceType(".zip");
 		frBean.setFilter(new ParamCheckFilter(config));
 		frBean.addUrlPatterns("/*");

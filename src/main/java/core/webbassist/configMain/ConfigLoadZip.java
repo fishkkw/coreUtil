@@ -6,7 +6,6 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.UnsupportedEncodingException;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
@@ -24,8 +23,8 @@ public class ConfigLoadZip extends AbstractLoadXml {
 	private static final Logger logger = LoggerFactory.getLogger(ConfigLoadZip.class);
 
 	@Override
-	public void LoadConfig(String path) throws ServletException {
-		InputStream resourceAsStream = this.getClass().getClassLoader().getResourceAsStream(path);
+	public void LoadConfig() throws ServletException {
+		InputStream resourceAsStream = this.getClass().getClassLoader().getResourceAsStream(this.path);
 		if (resourceAsStream == null) {
 			logger.error("Configuration file is empty...");
 			throw new ServletException();
@@ -35,12 +34,17 @@ public class ConfigLoadZip extends AbstractLoadXml {
 		try {
 			while ((ze = zis.getNextEntry()) != null) {
 				if (!ze.isDirectory()) {
-					byte[] content = this.getFileContent(zis).getBytes();
-					SafetyReadXml readXml = new SafetyReadXml();
-					Document document = readXml.read(new InputStreamReader(new ByteArrayInputStream(content), "utf-8"));
-					if (ze.getName().endsWith(".xml")) {
-						System.err.println("file - " + ze.getName() + " : " + ze.getSize() + " bytes");
+					String name = ze.getName();
+					if ("validate/validate-config.xml".equals(name)) {
+						byte[] content = this.getFileContent(zis).getBytes("utf-8");
+						SafetyReadXml readXml = new SafetyReadXml();
+						Document document = readXml
+								.read(new InputStreamReader(new ByteArrayInputStream(content), "utf-8"));
+						this.paresCommonXml(document);
+						if (ze.getName().endsWith(".xml")) {
+							System.err.println("file - " + ze.getName() + " : " + ze.getSize() + " bytes");
 
+						}
 					}
 				}
 			}

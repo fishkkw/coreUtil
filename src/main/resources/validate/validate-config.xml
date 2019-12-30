@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<validate-config>
+	<exclude-url enable="true" errorHander="111">
+		<url-pattern>/account/selectuserbyaccount</url-pattern>
+		<url-pattern>/account/selectuserbyaccount</url-pattern>
+		<url-pattern>/account/selectuserbyaccount</url-pattern>
+	</exclude-url>
+
+	<paramete-checkers>
+		<validates name="XSS">
+			<validate name="REGULAR_VALID" rule="[0-9]{20}" errorMessage="只能是数字"></validate>
+			<validate name="REGULAR_VALID" rule="[0-9]{20}" errorMessage="只能是数字"></validate>
+		</validates>
+	</paramete-checkers>
+</validate-config>
