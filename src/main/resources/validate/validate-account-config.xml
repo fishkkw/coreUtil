@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<param-validators>
+	<param_validator url="" method="post" errorMassage="" datapatter="" validatorHandler="">
+		<parameter name="" requied="">
+			<validator name =""></validator>
+			<validator ref=""></validator>
+		</parameter>
+	</param_validator>
+</param-validators>

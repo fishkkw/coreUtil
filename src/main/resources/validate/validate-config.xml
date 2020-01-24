@@ -7,9 +7,13 @@
 	</exclude-url>
 
 	<paramete-checkers>
-		<validates name="XSS">
+		<validators alias="XSS" errorMessage="">
 			<validate name="REGULAR_VALID" rule="[0-9]{20}" errorMessage="只能是数字"></validate>
 			<validate name="REGULAR_VALID" rule="[0-9]{20}" errorMessage="只能是数字"></validate>
-		</validates>
+		</validators>
+		<validators alias="XSS2" errorMessage="">
+			<validate name="REGULAR_VALID" rule="[0-9]{20}" errorMessage="只能是数字"></validate>
+			<validate name="REGULAR_VALID" rule="[0-9]{20}" errorMessage="只能是数字"></validate>
+		</validators>
 	</paramete-checkers>
 </validate-config>
