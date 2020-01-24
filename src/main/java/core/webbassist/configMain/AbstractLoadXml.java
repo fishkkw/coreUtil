@@ -1,8 +1,10 @@
 package core.webbassist.configMain;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 
@@ -13,7 +15,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import core.webbassist.bean.FileCatch;
+import core.webbassist.bean.ParamValidatorConfig;
 import core.webbassist.bean.UrlWhiteConfig;
+import core.webbassist.bean.paramValidator.ValidatorConfig;
 
 public abstract class AbstractLoadXml {
 
@@ -34,14 +38,58 @@ public abstract class AbstractLoadXml {
 
 	protected void paresCommonXml(Document document) {
 		Element rootElement = document.getRootElement();
-		this.addUrlWhiteConfig(rootElement);
-	}
-
-	private void addUrlWhiteConfig(Element rootElement) {
 		if (rootElement == null) {
 			logger.warn("urlWhiteConfig is null..");
 			return;
 		}
+		this.addUrlWhiteConfig(rootElement);
+		this.addParamValidatorConfig(rootElement);
+	}
+
+	public void addParamValidatorConfig(Element rootElement) {
+		Element element = rootElement.element("paramete-checkers");
+		if (element == null) {
+			logger.warn("urlWhiteConfig is null..");
+			return;
+		}
+		//校验集合
+		Iterator<Element> elementIterator = element.elementIterator("validators");
+		if (elementIterator == null) {
+			logger.warn("validators is null..");
+			return;
+		}
+		ParamValidatorConfig paramConfig = new ParamValidatorConfig();
+		Map<String, ValidatorConfig> alias = paramConfig.getAlias();
+		while (elementIterator.hasNext()) {
+			Element next = elementIterator.next();
+			//校验名称
+			Attribute aliasName = next.attribute("alias");
+			String aliasString = aliasName.getStringValue();
+			Attribute errorMessage = next.attribute("errorMessage");
+			String errorString = errorMessage.getStringValue();
+			ValidatorConfig config = new ValidatorConfig();
+			config.setErrorMassage(errorString);
+			//规则集合
+			Iterator<Element> nextIterator = next.elementIterator("validate");
+			List<Map> validator = config.getValidator();
+			while (nextIterator.hasNext()) {
+				Element nextAttr = nextIterator.next();
+				Iterator<Attribute> attributeIterator = nextAttr.attributeIterator();
+				Map<String, String> map = new HashMap<String, String>();
+				//属性
+				while (attributeIterator.hasNext()) {
+					Attribute nextAttributeIterator = attributeIterator.next();
+					map.put(nextAttributeIterator.getName(), nextAttributeIterator.getStringValue());
+				}
+				validator.add(map);
+			}
+			alias.put(aliasString, config);
+		}
+		paramConfig.setAlias(alias);
+		FileCatch.init().setParamConfig(paramConfig);
+	}
+
+	private void addUrlWhiteConfig(Element rootElement) {
 		UrlWhiteConfig config = new UrlWhiteConfig();
 		Element element = rootElement.element("exclude-url");
 		if (element == null) {

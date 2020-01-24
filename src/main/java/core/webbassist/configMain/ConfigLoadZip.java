@@ -35,16 +35,18 @@ public class ConfigLoadZip extends AbstractLoadXml {
 			while ((ze = zis.getNextEntry()) != null) {
 				if (!ze.isDirectory()) {
 					String name = ze.getName();
-					if ("validate/validate-config.xml".equals(name)) {
+					if (name.endsWith("validate-config.xml")) {
 						byte[] content = this.getFileContent(zis).getBytes("utf-8");
 						SafetyReadXml readXml = new SafetyReadXml();
 						Document document = readXml
 								.read(new InputStreamReader(new ByteArrayInputStream(content), "utf-8"));
 						this.paresCommonXml(document);
-						if (ze.getName().endsWith(".xml")) {
-							System.err.println("file - " + ze.getName() + " : " + ze.getSize() + " bytes");
-
-						}
+					} else if (name.endsWith("config.xml")) {
+						byte[] content = this.getFileContent(zis).getBytes("utf-8");
+						SafetyReadXml readXml = new SafetyReadXml();
+						Document document = readXml
+								.read(new InputStreamReader(new ByteArrayInputStream(content), "utf-8"));
+						logger.info(name);
 					}
 				}
 			}
