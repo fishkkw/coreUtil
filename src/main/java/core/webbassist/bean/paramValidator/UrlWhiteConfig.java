@@ -1,4 +1,4 @@
-package core.webbassist.bean;
+package core.webbassist.bean.paramValidator;
 
 import java.util.List;
 

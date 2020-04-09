@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
-import core.webbassist.config.VaildParamConfig;
+import core.webbassist.bean.paramValidator.VaildParamConfig;
 import core.webbassist.frameConfig.ParamCheckFilter;
 import core.webbassist.frameConfig.WebFilter;
 

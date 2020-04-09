@@ -1,9 +1,7 @@
-package core.webbassist.bean;
+package core.webbassist.bean.paramValidator;
 
 import java.util.HashMap;
 import java.util.Map;
-
-import core.webbassist.bean.paramValidator.ValidatorConfig;
 
 public class ParamValidatorConfig {
 	

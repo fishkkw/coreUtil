@@ -46,10 +46,11 @@ public class ConfigLoadZip extends AbstractLoadXml {
 						SafetyReadXml readXml = new SafetyReadXml();
 						Document document = readXml
 								.read(new InputStreamReader(new ByteArrayInputStream(content), "utf-8"));
-						logger.info(name);
+						this.paresURLCheckXml(document);
 					}
 				}
 			}
+			this.setRequestMethodmap();
 			zis.closeEntry();
 			zis.close();
 		} catch (IOException e) {

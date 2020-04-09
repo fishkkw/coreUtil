@@ -10,7 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.filter.GenericFilterBean;
 
-import core.webbassist.config.VaildParamConfig;
+import core.webbassist.bean.paramValidator.VaildParamConfig;
 import core.webbassist.configMain.AbstractLoadXml;
 
 public class ParamCheckFilter extends GenericFilterBean {

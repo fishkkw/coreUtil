@@ -1,4 +1,4 @@
-package core.webbassist.config;
+package core.webbassist.bean.paramValidator;
 
 public class VaildParamConfig {
 
