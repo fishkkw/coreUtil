@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <param-validators>
-	<param_validator url="/account/selectuserbyaccount" method="post" errorMassage="" datapatter="" validatorHandler="">
+	<param_validator url="/account/FFFFFFFFFFFF" method="post" errorMassage="" datapatter="" validatorHandler="">
 		<parameter name="name" requied="true">
 			<validator name ="max" length="1"></validator>
 			<validator ref="xxs"></validator>

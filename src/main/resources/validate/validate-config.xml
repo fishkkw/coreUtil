@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <validate-config>
-	<exclude-url enable="true" errorHander="111">
-		<url-pattern>/account/selectuserbyaccount</url-pattern>
-		<url-pattern>/account/selectuserbyaccount</url-pattern>
-		<url-pattern>/account/selectuserbyaccount</url-pattern>
-	</exclude-url>
+    <exclude-url enable="true" errorHander="core.sys.controller.common.ValidUrlImpl">
+        <url-pattern>/account/selectuserbyaccount11</url-pattern>
+        <url-pattern>/account/selectuserbyaccount22</url-pattern>
+        <url-pattern>/account/selectuserbyaccount33</url-pattern>
+    </exclude-url>
 
-	<paramete-checkers>
-		<validators alias="XSS" errorMessage="">
-			<validate name="REGULAR_VALID" rule="[0-9]{20}" errorMessage="只能是数字"></validate>
-			<validate name="REGULAR_VALID" rule="[0-9]{20}" errorMessage="只能是数字"></validate>
-		</validators>
-		<validators alias="XSS2" errorMessage="">
-			<validate name="REGULAR_VALID" rule="[0-9]{20}" errorMessage="只能是数字"></validate>
-			<validate name="REGULAR_VALID" rule="[0-9]{20}" errorMessage="只能是数字"></validate>
-		</validators>
-	</paramete-checkers>
+    <paramete-checkers>
+        <validators alias="XSS" errorMessage="">
+            <validate name="REGULAR_VALID1" rule="[0-9]{20}" errorMessage="只能是数字"></validate>
+            <validate name="REGULAR_VALID2" rule="[0-9]{20}" errorMessage="只能是数字"></validate>
+        </validators>
+        <validators alias="XSS2" errorMessage="">
+            <validate name="REGULAR_VALID1" rule="[0-9]{20}" errorMessage="只能是数字"></validate>
+            <validate name="REGULAR_VALID2" rule="[0-9]{20}" errorMessage="只能是数字"></validate>
+        </validators>
+    </paramete-checkers>
 </validate-config>
